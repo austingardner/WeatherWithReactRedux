@@ -23,12 +23,17 @@ When you have a container, you use certain syntax. The "export default class ...
 
 The mapStateToProps function takes data from the store and puts it into the constructor of the component that the container wraps. For example, I take the weather that I got from the open weather api and pass it to my WeatherList class in weather_list.js. Then you put mapStateToProps into connect. 
 
-How Redux data flows: 
+How Redux data flows (picture sohamkamani.com): 
+![redux-flow](https://user-images.githubusercontent.com/25092249/35957773-9438e8b8-0c5a-11e8-88fe-4f0d3ce29b0b.png)
+
+Things start with actions. Actions give data to the reducers which then evaluate the actions and add them to the state.
+"In addition to reading the state, container components can dispatch actions. In a similar fashion, you can define a function called mapDispatchToProps() that receives the dispatch() method and returns callback props that you want to inject into the presentational component." (redux.js.org) You can call dispatch(myFunc()) and dipatch will send the action and its data to the reducers. 
 
 
 "Reducers are just pure functions that take the previous state and an action, and return the next state." (redux.js.org) These functions usually have a switch statement based on the action type. If the action is a specific type, the reducer returns a NEW object with the data from the action (usually action.payload.data). It is very important to emphasize that all reducers must return a NEW object, or you will run into problems. One way to resolve this is to return [...state, action.payload.data ] to add the new data on to the state's existing data in a list.
 
-
+Then you can grab the data you have received from the Redux store because of mapStateToProps and put it out to the DOM! 
 
 Sources
 https://redux.js.org/ 
+https://www.sohamkamani.com/blog/2017/03/31/react-redux-connect-explained/
